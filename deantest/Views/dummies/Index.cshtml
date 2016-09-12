@@ -1,0 +1,185 @@
+﻿@model IEnumerable<deantest.Models.dummy>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script type="text/javascript" src="~/DeanD3/d3Test.js" charset="utf-8"></script>
+<script type="text/javascript" src="~/Scripts/d3.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="~/Scripts/jquery-3.1.0.min.js" chartset="utf-8"></script>
+<script type="text/javascript" src="~/Scripts/plotly-latest.min.js" charset="utf-8"></script>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        var dataset = @Html.Raw(Json.Encode(this.Model)),
+            data2 = {
+                x: [],
+                y: [],
+                z: [],
+                mode: 'lines',
+                marker: {
+                    color: '#1f77b4',
+                    size: 12,
+                    symbol: 'circle',
+                    line: {
+                        color: 'rgb(0,0,0)',
+                        width: 0
+                    }},
+                line: {
+                    color: '#1f77b4',
+                    width: 1
+                },
+                type: 'scatter3d'
+            };
+
+        var data3 = {
+            x: [],
+            y: [],
+            z: [],
+            mode: 'lines',
+            marker: {
+                color: '#9467bd',
+                size: 12,
+                symbol: 'circle',
+                line: {
+                    color: 'rgb(0,0,0)',
+                    width: 0
+                }},
+            line: {
+                color: 'rgb(44, 160, 44)',
+                width: 1
+            },
+            type: 'scatter3d'
+        };
+        debugger;
+        for (var i = 0; i < dataset.length/2; i++) {
+            data2.x.push(dataset[i].x);
+            data2.y.push(dataset[i].y);
+            data2.z.push(dataset[i].testID);
+        }
+
+        for (var j = 0; j < dataset.length/2; j++) {
+            data3.x.push(dataset[j].x);
+            data3.y.push(dataset[j].y);
+            data3.z.push(dataset[j].testID);
+        }
+
+        //var json = new JavaScriptSerializer().Serialize(model);
+
+
+        var data = [data2, data3];
+        debugger;
+        var layout = {
+            title: '3D Line Plot',
+            autosize: false,
+            width: 500,
+            height: 500,
+            margin: {
+                l: 0,
+                r: 0,
+                b: 0,
+                t: 65
+            }
+        };
+       Plotly.newPlot('myDiv', data, layout);
+
+        var z1=[],z2=[],z3=[];
+       
+        for (var l = 0; l < 14; l++) {
+            for (var m = 0; m < 5; m++) {
+                z1.push((Math.random() * (0.120 - 0.0200) + 0.0200).toFixed(4));
+                z2.push((Math.random() * (0.120 - 0.0200) + 0.0200).toFixed(4));
+                z3.push((Math.random() * (0.120 - 0.0200) + 0.0200).toFixed(4));
+            }
+        }
+    //    z1 = [
+    //[8.83,8.89,8.81,8.87,8.9,8.87],
+    //[8.89,8.94,8.85,8.94,8.96,8.92],
+    //[8.84,8.9,8.82,8.92,8.93,8.91],
+    //[8.79,8.85,8.79,8.9,8.94,8.92],
+    //[8.79,8.88,8.81,8.9,8.95,8.92],
+    //[8.8,8.82,8.78,8.91,8.94,8.92],
+    //[8.75,8.78,8.77,8.91,8.95,8.92],
+    //[8.8,8.8,8.77,8.91,8.95,8.94],
+    //[8.74,8.81,8.76,8.93,8.98,8.99],
+    //[8.89,8.99,8.92,9.1,9.13,9.11],
+    //[8.97,8.97,8.91,9.09,9.11,9.11],
+    //[9.04,9.08,9.05,9.25,9.28,9.27],
+    //[9,9.01,9,9.2,9.23,9.2],
+    //[8.99,8.99,8.98,9.18,9.2,9.19],
+    //[8.93,8.97,8.97,9.18,9.2,9.18]
+    //    ];
+
+    //    z2 = [];
+    //    for (var i=0;i<z1.length;i++ ) {
+    //        z2_row = [];
+    //        for(var j=0;j<z1[i].length;j++) {
+    //            z2_row.push(z1[i][j]+1);
+    //        }
+    //        z2.push(z2_row);
+    //    }
+
+    //    z3 = []
+    //    for (var i=0;i<z1.length;i++ ) {
+    //        z3_row = [];
+    //        for(var j=0;j<z1[i].length;j++) {
+    //            z3_row.push(z1[i][j]-1);
+    //        }
+    //        z3.push(z3_row);
+    //    }
+        var data_z1 = {z: z1, type: 'surface'};
+        var data_z2 = {z: z2, showscale: false, opacity:0.9, type: 'surface'};
+        var data_z3 = {z: z3, showscale: false, opacity:0.9, type: 'surface'};
+
+
+        debugger;
+        Plotly.newPlot('example', [data_z1, data_z2, data_z3]);
+
+
+    });
+
+
+</script>
+<h2>Index1</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<div id="myDiv"></div>
+<div id="example"></div>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.x)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.y)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.x)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.y)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.testID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.testID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.testID })
+            </td>
+        </tr>
+    }
+
+</table>
