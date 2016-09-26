@@ -188,6 +188,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\icon_git.jpg" />
+    <Content Include="Images\icon_git.png" />
     <Content Include="Scripts\ai.1.0.0-build00159.js" />
     <Content Include="Scripts\ai.1.0.0-build00159.min.js" />
     <Content Include="Scripts\bootstrap.js" />

@@ -1,4 +1,9 @@
 ﻿body {
+     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.428571429;
+  color: #000000;
+  background-color: #000000;
 }
 .mainBG{
     width: 100%;
@@ -9,12 +14,17 @@
     top: 7%;
 }
 
+.cardImage{
+        display: block;
+    margin: auto;
+}
+
 .cardRowPadding{
         padding: 2% 0% 0% 0%;
 }
 .card {
       box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    transition: 0.3s;
+    transition: 0.6s;
     width: 100%;
     height: 250px;
     background-color: #3498db;
@@ -26,8 +36,8 @@
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
     background-color: #1abc9c;
 }
-.card:focus{
-    background-color: #2ecc71;
+.card:active{
+    background-color: #34495e;
 }
 
 img {
